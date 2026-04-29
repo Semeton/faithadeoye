@@ -11,9 +11,34 @@
             </flux:sidebar.header>
 
             <flux:sidebar.nav>
-                <flux:sidebar.group :heading="__('Platform')" class="grid">
-                    <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
+                <flux:sidebar.group heading="Overview" class="grid">
+                    <flux:sidebar.item icon="squares-2x2" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')" wire:navigate>
+                        Dashboard
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="chart-bar" :href="route('admin.analytics')" :current="request()->routeIs('admin.analytics')" wire:navigate>
+                        Analytics
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="envelope" :href="route('admin.messages')" :current="request()->routeIs('admin.messages')" wire:navigate>
+                        Messages
+                        @php $unread = \App\Models\Message::unread()->count(); @endphp
+                        @if($unread > 0)
+                            <flux:badge size="sm" color="red" class="ml-auto">{{ $unread }}</flux:badge>
+                        @endif
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+
+                <flux:sidebar.group heading="Content" class="grid">
+                    <flux:sidebar.item icon="pencil-square" :href="route('admin.content')" :current="request()->routeIs('admin.content')" wire:navigate>
+                        Site Content
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="folder-open" :href="route('admin.projects')" :current="request()->routeIs('admin.projects')" wire:navigate>
+                        Projects
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="clock" :href="route('admin.milestones')" :current="request()->routeIs('admin.milestones')" wire:navigate>
+                        Career Timeline
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="bolt" :href="route('admin.impact-areas')" :current="request()->routeIs('admin.impact-areas')" wire:navigate>
+                        Impact Areas
                     </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
@@ -21,12 +46,8 @@
             <flux:spacer />
 
             <flux:sidebar.nav>
-                <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                    {{ __('Repository') }}
-                </flux:sidebar.item>
-
-                <flux:sidebar.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                    {{ __('Documentation') }}
+                <flux:sidebar.item icon="arrow-top-right-on-square" :href="route('home')" target="_blank">
+                    View Site
                 </flux:sidebar.item>
             </flux:sidebar.nav>
 
