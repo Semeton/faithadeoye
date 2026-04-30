@@ -24,7 +24,7 @@ class SiteSettingSeeder extends Seeder
 
             // Credibility
             ['key' => 'credibility_tagline', 'value' => 'Driven strategy for the most recognisable names across Africa, US, UK and beyond.', 'type' => 'text', 'group' => 'credibility', 'label' => 'Tagline'],
-            ['key' => 'credibility_clients', 'value' => 'Globacom, AB InBev, Access Bank, Heritage Bank, Sterling Bank, SeamlessHR, Branch International, AutochekNG, FourthCanvas, Malta Guinness, Fundall', 'type' => 'text', 'group' => 'credibility', 'label' => 'Clients (comma-separated)'],
+            ['key' => 'credibility_clients', 'value' => 'Anakle, Fundall, Jeetar, Faramove, Studio14, Leatherback, TheChumEffect, Simius AI, FourthCanvas, SeamlessHR', 'type' => 'text', 'group' => 'credibility', 'label' => 'Clients (comma-separated)'],
 
             // Projects section
             ['key' => 'projects_section_heading', 'value' => 'Every project started with a problem. Here\'s how I solved them.', 'type' => 'text', 'group' => 'projects', 'label' => 'Section Heading'],
