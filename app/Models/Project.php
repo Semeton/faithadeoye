@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['slug', 'category', 'title', 'company', 'country', 'year', 'the_problem', 'what_i_did', 'skills_tags', 'cover_image', 'is_featured', 'published', 'sort_order'])]
+#[Fillable(['slug', 'category', 'title', 'company', 'country', 'year', 'the_problem', 'key_result', 'what_i_did', 'skills_tags', 'cover_image', 'is_featured', 'published', 'sort_order'])]
 class Project extends Model
 {
     /** @use HasFactory<ProjectFactory> */

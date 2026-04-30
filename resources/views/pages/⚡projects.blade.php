@@ -96,6 +96,13 @@ new #[Layout('layouts.public')] #[Title('My Projects — Faith O. Adeoye')] clas
                         </h2>
                         <p class="text-sm text-zinc-500 mb-4">{{ $project->company }} · {{ $project->country }}</p>
 
+                        @if($project->key_result)
+                            <div class="flex items-center gap-2 mb-4 px-3 py-2 rounded-lg bg-amber-50 border border-amber-100">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
+                                <span class="text-xs font-semibold text-amber-700">{{ $project->key_result }}</span>
+                            </div>
+                        @endif
+
                         <p class="text-sm text-zinc-600 leading-relaxed line-clamp-2 mb-6">
                             {{ $project->the_problem }}
                         </p>

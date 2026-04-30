@@ -14,8 +14,8 @@ class CareerMilestoneSeeder extends Seeder
             ['period' => '2020 – 2021', 'role' => 'Content Associate', 'company' => null, 'sort_order' => 2],
             ['period' => '2021', 'role' => 'Brand Engagement Manager', 'company' => null, 'sort_order' => 3],
             ['period' => '2021 – 2023', 'role' => 'Content Marketing Associate', 'company' => null, 'sort_order' => 4],
-            ['period' => '2023 – 2024', 'role' => 'Senior Content Writer / Storyteller', 'company' => null, 'sort_order' => 5],
-            ['period' => '2024 – 2025', 'role' => 'Growth & Product-Content Marketing Specialist', 'company' => null, 'sort_order' => 6],
+            ['period' => '2023 – 2024', 'role' => 'Senior Content Writer / Storyteller', 'company' => 'FourthCanvas', 'sort_order' => 5],
+            ['period' => '2024 – 2025', 'role' => 'Growth & Product-Content Marketing Specialist', 'company' => 'SeamlessHR', 'sort_order' => 6],
             ['period' => '2025 – Present', 'role' => 'Product Marketing Specialist', 'company' => null, 'sort_order' => 7],
         ];
 

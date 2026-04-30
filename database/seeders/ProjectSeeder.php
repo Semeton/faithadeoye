@@ -18,6 +18,7 @@ class ProjectSeeder extends Seeder
                 'country' => 'Kenya',
                 'year' => '2023',
                 'the_problem' => 'M-KOPA, through FourthCanvas agency, needed a website that fully communicated their essence, impact, and offerings.',
+                'key_result' => null,
                 'what_i_did' => [
                     'Developed the information architecture as the strategic foundation.',
                     'Crafted market-led messaging in alignment with business goals.',
@@ -37,6 +38,7 @@ class ProjectSeeder extends Seeder
                 'country' => 'Kenya, Nigeria, Ghana, Uganda',
                 'year' => '2024 – 2025',
                 'the_problem' => 'SeamlessHR needed to generate leads through organic search while supporting broader revenue goals, but lacked the SEO foundation to compete for visibility in key markets.',
+                'key_result' => '#1 ranked HR & Payroll Software across Nigeria, Ghana, Kenya & Uganda',
                 'what_i_did' => [
                     'Audited the existing website for SEO gaps and opportunities.',
                     'Researched and mapped keywords by intent across target markets.',

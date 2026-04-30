@@ -422,7 +422,14 @@ new #[Layout('layouts.public')] #[Title('Faith O. Adeoye — Product Marketing &
                     <h3 class="text-xl font-bold text-white mb-1 group-hover:text-zinc-300 transition-colors">
                         {{ $project->title }}
                     </h3>
-                    <p class="text-sm text-zinc-500 mb-6">{{ $project->company }} · {{ $project->country }}</p>
+                    <p class="text-sm text-zinc-500 mb-4">{{ $project->company }} · {{ $project->country }}</p>
+
+                    @if($project->key_result)
+                        <div class="flex items-center gap-2 mb-5 px-3 py-2 rounded-lg bg-amber-400/10 border border-amber-400/20">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
+                            <span class="text-xs font-semibold text-amber-300">{{ $project->key_result }}</span>
+                        </div>
+                    @endif
 
                     <p class="text-sm text-zinc-400 leading-relaxed line-clamp-3 mb-6">
                         {{ $project->the_problem }}
