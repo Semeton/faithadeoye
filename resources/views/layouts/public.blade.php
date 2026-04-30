@@ -41,8 +41,18 @@
         {{-- Navigation --}}
         <header class="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-sm border-b border-zinc-100">
             <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-                <a href="{{ route('home') }}" wire:navigate class="text-sm font-semibold tracking-widest uppercase text-zinc-900 hover:text-zinc-600 transition-colors">
-                    Faith O. Adeoye
+                <a href="{{ route('home') }}" wire:navigate class="flex items-center gap-2.5 group">
+                    {{-- Monogram mark --}}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" class="h-7 w-7 shrink-0" aria-hidden="true">
+                        <rect width="28" height="28" rx="6" fill="#09090b"/>
+                        <rect x="7" y="7" width="3.5" height="14" rx="1.75" fill="white"/>
+                        <rect x="7" y="7" width="13" height="3.5" rx="1.75" fill="white"/>
+                        <rect x="7" y="13.5" width="9" height="3.5" rx="1.75" fill="white"/>
+                        <circle cx="22" cy="22" r="3" fill="#f59e0b"/>
+                    </svg>
+                    <span class="text-sm font-semibold tracking-wide text-zinc-900 group-hover:text-zinc-600 transition-colors">
+                        Faith O. Adeoye
+                    </span>
                 </a>
                 <div class="flex items-center gap-8">
                     <a href="{{ route('projects') }}" wire:navigate
@@ -65,7 +75,17 @@
         {{-- Footer --}}
         <footer class="bg-zinc-950 text-zinc-400 py-10">
             <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
-                <span>&copy; {{ date('Y') }} Faith O. Adeoye. All rights reserved.</span>
+                <div class="flex items-center gap-3">
+                    {{-- Footer mark (white version) --}}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" class="h-5 w-5 shrink-0 opacity-70" aria-hidden="true">
+                        <rect width="22" height="22" rx="5" fill="white" fill-opacity="0.12"/>
+                        <rect x="5.5" y="5.5" width="2.75" height="11" rx="1.375" fill="white"/>
+                        <rect x="5.5" y="5.5" width="10" height="2.75" rx="1.375" fill="white"/>
+                        <rect x="5.5" y="10.5" width="7" height="2.75" rx="1.375" fill="white"/>
+                        <circle cx="17" cy="17" r="2.25" fill="#f59e0b"/>
+                    </svg>
+                    <span>&copy; {{ date('Y') }} Faith O. Adeoye. All rights reserved.</span>
+                </div>
                 <div class="flex items-center gap-6">
                     <a href="mailto:{{ \App\Models\SiteSetting::get('contact_email', 'faithadeoye@gmail.com') }}"
                        class="hover:text-white transition-colors">

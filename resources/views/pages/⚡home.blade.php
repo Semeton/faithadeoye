@@ -87,70 +87,99 @@ new #[Layout('layouts.public')] #[Title('Faith O. Adeoye — Product Marketing &
 
 <div>
 {{-- =================== HERO =================== --}}
+@php
+    $photo       = $this->settings->get('hero_photo')?->value;
+    $heroName    = $this->settings->get('hero_name')?->value ?? 'Faith O. Adeoye';
+    $linkedinUrl = $this->settings->get('hero_linkedin_url')?->value;
+@endphp
 <section class="relative min-h-[92vh] bg-zinc-950 text-white flex items-center overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.04)_0%,_transparent_60%)] pointer-events-none"></div>
-    <div class="max-w-6xl mx-auto px-6 py-24 w-full">
-        <div class="max-w-3xl">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(245,158,11,0.04)_0%,_transparent_50%)] pointer-events-none"></div>
 
-            {{-- Name + specialisms --}}
-            <div class="flex flex-wrap items-center gap-3 mb-8">
-                @php $photo = $this->settings->get('hero_photo')?->value; @endphp
-                @if($photo)
-                    <img src="{{ asset('storage/'.$photo) }}" alt="{{ $this->settings->get('hero_name')?->value ?? 'Faith O. Adeoye' }}"
-                         class="w-12 h-12 rounded-full object-cover ring-2 ring-white/20" />
-                @endif
-                <div>
-                    <p class="text-zinc-400 text-sm tracking-widest uppercase font-medium">
-                        {{ $this->settings->get('hero_tenure')?->value ?? '7+ Years in the Field' }}
-                    </p>
+    <div class="max-w-6xl mx-auto px-6 py-24 w-full">
+        <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+
+            {{-- Left: copy --}}
+            <div class="order-2 lg:order-1">
+
+                {{-- Tenure badge --}}
+                <div class="inline-flex items-center gap-2 mb-8 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-semibold tracking-widest uppercase text-zinc-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></span>
+                    {{ $this->settings->get('hero_tenure')?->value ?? '7+ Years in the Field' }}
+                </div>
+
+                {{-- Headline --}}
+                <h1 class="text-4xl sm:text-5xl lg:text-[3.25rem] font-bold leading-[1.08] tracking-tight mb-6">
+                    {{ $this->settings->get('hero_headline')?->value ?? 'Your product solves a problem. I make sure the right people know it.' }}
+                </h1>
+
+                {{-- Subtext --}}
+                <p class="text-base sm:text-lg text-zinc-400 leading-relaxed mb-8">
+                    {{ $this->settings->get('hero_subtext')?->value ?? 'From positioning and GTM strategy to messaging that converts, I bridge the gap between what a product does and why a customer needs it.' }}
+                </p>
+
+                {{-- Specialisms --}}
+                <div class="flex flex-wrap gap-2 mb-10">
+                    @foreach(explode(',', $this->settings->get('hero_specialisms')?->value ?? 'B2B, B2C, DTC, SaaS, Marketplace') as $tag)
+                        <span class="text-xs font-medium px-3 py-1 rounded-full border border-white/15 text-zinc-300 bg-white/5">
+                            {{ trim($tag) }}
+                        </span>
+                    @endforeach
+                </div>
+
+                {{-- CTAs --}}
+                <div class="flex flex-wrap gap-3 items-center">
+                    <a href="#projects"
+                       class="inline-flex items-center gap-2 bg-white text-zinc-900 font-semibold px-6 py-3 rounded-lg hover:bg-zinc-100 transition-colors text-sm">
+                        {{ $this->settings->get('hero_cta_primary_label')?->value ?? 'View my work' }}
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"/></svg>
+                    </a>
+                    <a href="#contact"
+                       class="inline-flex items-center gap-2 border border-white/25 text-white font-medium px-6 py-3 rounded-lg hover:bg-white/8 transition-colors text-sm">
+                        {{ $this->settings->get('hero_cta_secondary_label')?->value ?? 'Get in touch' }}
+                    </a>
+                    @if($linkedinUrl)
+                        <a href="{{ $linkedinUrl }}" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center gap-1.5 text-zinc-500 hover:text-white transition-colors text-sm font-medium">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            LinkedIn
+                        </a>
+                    @endif
                 </div>
             </div>
 
-            {{-- Specialisms tags --}}
-            <div class="flex flex-wrap gap-2 mb-10">
-                @foreach(explode(',', $this->settings->get('hero_specialisms')?->value ?? 'B2B, B2C, DTC, SaaS, Marketplace') as $tag)
-                    <span class="text-xs font-medium px-3 py-1 rounded-full border border-white/20 text-zinc-300">
-                        {{ trim($tag) }}
-                    </span>
-                @endforeach
-            </div>
-
-            {{-- Headline --}}
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
-                {{ $this->settings->get('hero_headline')?->value ?? 'Your product solves a problem. I make sure the right people know it.' }}
-            </h1>
-
-            {{-- Subtext --}}
-            <p class="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-2xl mb-12">
-                {{ $this->settings->get('hero_subtext')?->value ?? 'From positioning and GTM strategy to messaging that converts, I bridge the gap between what a product does and why a customer needs it.' }}
-            </p>
-
-            {{-- CTAs --}}
-            <div class="flex flex-wrap gap-4 items-center">
-                <a href="#projects"
-                   class="inline-flex items-center gap-2 bg-white text-zinc-900 font-semibold px-6 py-3 rounded-lg hover:bg-zinc-100 transition-colors text-sm">
-                    {{ $this->settings->get('hero_cta_primary_label')?->value ?? 'View my work' }}
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"/></svg>
-                </a>
-                <a href="#contact"
-                   class="inline-flex items-center gap-2 border border-white/30 text-white font-medium px-6 py-3 rounded-lg hover:bg-white/10 transition-colors text-sm">
-                    {{ $this->settings->get('hero_cta_secondary_label')?->value ?? 'Get in touch' }}
-                </a>
-                @php $linkedinUrl = $this->settings->get('hero_linkedin_url')?->value; @endphp
-                @if($linkedinUrl)
-                    <a href="{{ $linkedinUrl }}" target="_blank" rel="noopener noreferrer"
-                       class="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-sm font-medium">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        LinkedIn
-                    </a>
+            {{-- Right: photo --}}
+            <div class="order-1 lg:order-2 flex justify-center lg:justify-end">
+                @if($photo)
+                    <div class="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-[26rem] lg:h-[26rem]">
+                        {{-- Decorative amber ring --}}
+                        <div class="absolute -inset-3 rounded-full border border-amber-400/20"></div>
+                        <div class="absolute -inset-6 rounded-full border border-white/5"></div>
+                        {{-- Photo --}}
+                        <img src="{{ asset('storage/'.$photo) }}"
+                             alt="{{ $heroName }}"
+                             class="w-full h-full rounded-full object-cover object-top grayscale contrast-110 brightness-90 ring-1 ring-white/10" />
+                        {{-- Subtle gradient overlay at the bottom to blend into the dark bg --}}
+                        <div class="absolute inset-x-0 bottom-0 h-1/4 rounded-b-full bg-gradient-to-t from-zinc-950/60 to-transparent pointer-events-none"></div>
+                        {{-- Name badge --}}
+                        <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap bg-zinc-900 border border-zinc-800 rounded-full px-5 py-2 text-sm font-semibold text-white shadow-xl">
+                            {{ $heroName }}
+                        </div>
+                    </div>
+                @else
+                    {{-- Placeholder when no photo is set --}}
+                    <div class="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full bg-zinc-900 border border-zinc-800 flex flex-col items-center justify-center gap-2">
+                        <svg class="w-10 h-10 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                        <p class="text-xs text-zinc-600">Upload photo via admin</p>
+                    </div>
                 @endif
             </div>
+
         </div>
     </div>
 
     {{-- Scroll indicator --}}
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <svg class="w-5 h-5 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+        <svg class="w-5 h-5 text-zinc-700" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
         </svg>
     </div>
@@ -210,42 +239,140 @@ new #[Layout('layouts.public')] #[Title('Faith O. Adeoye — Product Marketing &
 </section>
 
 {{-- =================== CAREER TIMELINE =================== --}}
-<section class="bg-white py-24">
-    <div class="max-w-6xl mx-auto px-6">
-        <div class="mb-14">
+<section class="bg-white py-24 overflow-hidden">
+    <div class="max-w-5xl mx-auto px-6">
+
+        {{-- Header --}}
+        <div class="mb-16 max-w-2xl">
             <p class="text-xs font-semibold tracking-widest uppercase text-zinc-400 mb-3">The Journey</p>
             <h2 class="text-3xl sm:text-4xl font-bold text-zinc-900">
                 {{ $this->settings->get('career_headline')?->value ?? 'From an agency intern to a full-funnel product marketing specialist' }}
             </h2>
-            <p class="mt-3 text-zinc-500">{{ $this->settings->get('career_subtext')?->value ?? 'Here\'s how the story unfolded.' }}</p>
+            <p class="mt-4 text-zinc-500 leading-relaxed">
+                {{ $this->settings->get('career_subtext')?->value ?? "Here's how the story unfolded." }}
+            </p>
         </div>
 
-        {{-- Timeline --}}
+        {{-- ── Zigzag timeline ─────────────────────────────────────── --}}
         <div class="relative">
-            {{-- Horizontal line on desktop --}}
-            <div class="hidden lg:block absolute top-5 left-0 right-0 h-px bg-zinc-200"></div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-{{ min(count($this->milestones), 7) }} gap-6 lg:gap-4">
+            {{-- Centre spine (desktop) --}}
+            <div class="hidden lg:block absolute left-1/2 -translate-x-px top-3 bottom-3 w-0.5
+                         bg-gradient-to-b from-zinc-100 via-zinc-300 to-amber-400 rounded-full"></div>
+
+            {{-- Left spine (mobile) --}}
+            <div class="lg:hidden absolute left-5 top-3 bottom-3 w-0.5
+                         bg-gradient-to-b from-zinc-100 via-zinc-300 to-amber-400 rounded-full"></div>
+
+            <div class="space-y-0">
                 @foreach($this->milestones as $i => $milestone)
-                    <div class="relative flex flex-col lg:items-center">
-                        {{-- Dot --}}
-                        <div class="relative z-10 w-10 h-10 rounded-full border-2 border-zinc-200 bg-white flex items-center justify-center mb-4 shrink-0
-                                    {{ $loop->last ? 'border-zinc-900 bg-zinc-900' : '' }}">
-                            <span class="text-xs font-bold {{ $loop->last ? 'text-white' : 'text-zinc-400' }}">
-                                {{ $i + 1 }}
-                            </span>
+                @php $isLeft = $i % 2 === 0; @endphp
+
+                <div class="relative {{ $loop->last ? 'pb-0' : 'pb-10 lg:pb-14' }}">
+
+                    {{-- ── Mobile layout (single column) ── --}}
+                    <div class="flex gap-0 lg:hidden">
+                        {{-- Dot column --}}
+                        <div class="w-10 shrink-0 flex flex-col items-center relative z-10 pt-0.5">
+                            @if($loop->last)
+                                <span class="relative flex h-6 w-6">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-30" style="animation-duration:2.2s"></span>
+                                    <span class="relative flex h-6 w-6 rounded-full bg-amber-400 border-2 border-white shadow-lg shadow-amber-200/60"></span>
+                                </span>
+                            @elseif($loop->first)
+                                <span class="h-5 w-5 rounded-full bg-zinc-900 border-2 border-white shadow-sm flex items-center justify-center">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-white"></span>
+                                </span>
+                            @else
+                                <span class="h-3.5 w-3.5 rounded-full border-2 border-zinc-200 bg-white mt-1"></span>
+                            @endif
                         </div>
-                        <div class="lg:text-center">
-                            <p class="text-xs text-zinc-400 font-medium mb-1">{{ $milestone->period }}</p>
-                            <p class="text-sm font-semibold text-zinc-900 leading-snug">{{ $milestone->role }}</p>
+                        {{-- Content --}}
+                        <div class="flex-1 pb-1">
+                            <div class="flex flex-wrap items-center gap-2 mb-1">
+                                <span class="text-xs font-semibold tracking-widest uppercase
+                                             {{ $loop->last ? 'text-amber-500' : 'text-zinc-400' }}">
+                                    {{ $milestone->period }}
+                                </span>
+                                @if($loop->last)
+                                    <span class="text-xs px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200 font-bold">Now</span>
+                                @endif
+                            </div>
+                            <h3 class="font-bold leading-snug {{ $loop->last ? 'text-zinc-900 text-lg' : 'text-zinc-700 text-base' }}">
+                                {{ $milestone->role }}
+                            </h3>
                             @if($milestone->company)
-                                <p class="text-xs text-zinc-500 mt-0.5">{{ $milestone->company }}</p>
+                                <p class="text-sm text-zinc-500 mt-0.5">{{ $milestone->company }}</p>
                             @endif
                         </div>
                     </div>
+
+                    {{-- ── Desktop layout (zigzag) ── --}}
+                    <div class="hidden lg:grid lg:grid-cols-[1fr_80px_1fr] items-start">
+
+                        {{-- Left content --}}
+                        <div class="{{ $isLeft ? 'pr-10 text-right' : '' }}">
+                            @if($isLeft)
+                                <div class="inline-flex flex-row-reverse flex-wrap items-center gap-2 mb-1">
+                                    <span class="text-xs font-semibold tracking-widest uppercase
+                                                 {{ $loop->last ? 'text-amber-500' : 'text-zinc-400' }}">
+                                        {{ $milestone->period }}
+                                    </span>
+                                    @if($loop->last)
+                                        <span class="text-xs px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200 font-bold">Now</span>
+                                    @endif
+                                </div>
+                                <h3 class="font-bold leading-snug {{ $loop->last ? 'text-zinc-900 text-xl' : 'text-zinc-800 text-lg' }}">
+                                    {{ $milestone->role }}
+                                </h3>
+                                @if($milestone->company)
+                                    <p class="text-sm text-zinc-500 mt-0.5">{{ $milestone->company }}</p>
+                                @endif
+                            @endif
+                        </div>
+
+                        {{-- Centre dot --}}
+                        <div class="flex justify-center pt-1 relative z-10">
+                            @if($loop->last)
+                                <span class="relative flex h-7 w-7 items-center justify-center">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-25" style="animation-duration:2.2s"></span>
+                                    <span class="relative flex h-7 w-7 rounded-full bg-amber-400 border-[3px] border-white shadow-xl shadow-amber-300/40"></span>
+                                </span>
+                            @elseif($loop->first)
+                                <span class="h-6 w-6 rounded-full bg-zinc-900 border-[3px] border-white shadow-md"></span>
+                            @else
+                                <span class="h-4 w-4 rounded-full border-2 border-zinc-200 bg-white mt-1.5 shadow-sm"></span>
+                            @endif
+                        </div>
+
+                        {{-- Right content --}}
+                        <div class="{{ !$isLeft ? 'pl-10' : '' }}">
+                            @if(!$isLeft)
+                                <div class="flex flex-wrap items-center gap-2 mb-1">
+                                    <span class="text-xs font-semibold tracking-widest uppercase
+                                                 {{ $loop->last ? 'text-amber-500' : 'text-zinc-400' }}">
+                                        {{ $milestone->period }}
+                                    </span>
+                                    @if($loop->last)
+                                        <span class="text-xs px-2 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200 font-bold">Now</span>
+                                    @endif
+                                </div>
+                                <h3 class="font-bold leading-snug {{ $loop->last ? 'text-zinc-900 text-xl' : 'text-zinc-800 text-lg' }}">
+                                    {{ $milestone->role }}
+                                </h3>
+                                @if($milestone->company)
+                                    <p class="text-sm text-zinc-500 mt-0.5">{{ $milestone->company }}</p>
+                                @endif
+                            @endif
+                        </div>
+
+                    </div>
+                </div>
                 @endforeach
             </div>
         </div>
+        {{-- ─────────────────────────────────────────────────────────── --}}
+
     </div>
 </section>
 
