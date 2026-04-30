@@ -186,16 +186,31 @@ new #[Layout('layouts.public')] #[Title('Faith O. Adeoye — Product Marketing &
 </section>
 
 {{-- =================== CREDIBILITY =================== --}}
-<section class="bg-white border-b border-zinc-100 py-10">
-    <div class="max-w-6xl mx-auto px-6">
-        <p class="text-center text-xs font-semibold tracking-widest uppercase text-zinc-400 mb-8">
+@php $clients = $this->settings->get('credibility_clients')?->value ?? ''; @endphp
+<section class="bg-white border-y border-zinc-100 py-14 overflow-hidden">
+
+    {{-- Tagline --}}
+    <div class="max-w-6xl mx-auto px-6 text-center mb-10">
+        <p class="text-xs font-semibold tracking-widest uppercase text-zinc-400 mb-3">Worked With</p>
+        <p class="text-xl sm:text-2xl font-semibold text-zinc-800 max-w-xl mx-auto leading-snug">
             {{ $this->settings->get('credibility_tagline')?->value ?? 'Driven strategy for the most recognisable names across Africa, US, UK and beyond.' }}
         </p>
-        <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-            @foreach(explode(',', $this->settings->get('credibility_clients')?->value ?? '') as $client)
+    </div>
+
+    {{-- Scrolling ticker --}}
+    <div class="relative flex">
+        {{-- Gradient masks --}}
+        <div class="pointer-events-none absolute left-0 top-0 bottom-0 w-28 z-10 bg-gradient-to-r from-white to-transparent"></div>
+        <div class="pointer-events-none absolute right-0 top-0 bottom-0 w-28 z-10 bg-gradient-to-l from-white to-transparent"></div>
+
+        {{-- Two identical tracks side-by-side; CSS moves them left by 50% for a seamless loop --}}
+        <div class="flex shrink-0 w-full" style="animation: marquee 28s linear infinite;">
+            {{-- Track A --}}
+            @foreach(array_merge(explode(',', $clients), explode(',', $clients)) as $client)
                 @if(trim($client))
-                    <span class="text-sm font-semibold text-zinc-400 hover:text-zinc-700 transition-colors cursor-default tracking-wide">
-                        {{ trim($client) }}
+                    <span class="inline-flex items-center gap-6 px-6 whitespace-nowrap">
+                        <span class="text-sm font-bold tracking-wide text-zinc-400 uppercase">{{ trim($client) }}</span>
+                        <span class="w-1 h-1 rounded-full bg-zinc-200 shrink-0"></span>
                     </span>
                 @endif
             @endforeach

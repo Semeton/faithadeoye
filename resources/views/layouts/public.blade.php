@@ -59,7 +59,7 @@
                        class="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors {{ request()->routeIs('projects*') ? 'text-zinc-900' : '' }}">
                         Projects
                     </a>
-                    <a href="{{ route('home') }}#contact" wire:navigate
+                    <a href="{{ route('home') }}#contact"
                        class="text-sm font-medium text-zinc-600 hover:text-zinc-900 transition-colors">
                         Contact Me
                     </a>
