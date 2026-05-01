@@ -39,3 +39,9 @@ test('project detail returns 404 for unpublished project', function () {
 test('project detail returns 404 for nonexistent slug', function () {
     $this->get(route('project.show', 'does-not-exist'))->assertNotFound();
 });
+
+test('404 page renders custom view', function () {
+    $this->get('/this-does-not-exist')
+        ->assertNotFound()
+        ->assertSee("This page doesn't exist.", false);
+});
